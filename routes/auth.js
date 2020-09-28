@@ -4,8 +4,7 @@ const { Router } = require('express')
 
 const passport = require('passport')
 
-require(join(__dirname, '..', 'controllers', 'facebookAuth'))
-require(join(__dirname, '..', 'controllers', 'googleAuth'))
+require(join(__dirname, '..', 'controllers', 'auth'))
 
 const router = Router()
 

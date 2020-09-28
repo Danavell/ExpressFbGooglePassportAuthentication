@@ -1,7 +1,6 @@
 const passport = require("passport")
-const strategy = require("passport-facebook")
-
-const FacebookStrategy = strategy.Strategy
+const FacebookStrategy = require("passport-facebook").Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 passport.serializeUser(function (user, done) {
     done(null, user)
@@ -25,6 +24,27 @@ passport.use(
                 email,
                 firstName: first_name,
                 lastName: last_name
+            };
+
+            // USER SHOULD BE ADDED TO APP DB AT THIS POINT
+            console.log(userData)
+            done(null, profile);
+        }
+    )
+)
+
+passport.use(
+    new GoogleStrategy(
+        {
+            clientID: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            callbackURL: process.env.GOOGLE_CALLBACK_URL,
+            profileFields: ['id', 'email', 'name']
+        },
+        function (accessToken, refreshToken, profile, done) {
+            const { email } = profile._json;
+            const userData = {
+                email,
             };
 
             // USER SHOULD BE ADDED TO APP DB AT THIS POINT
