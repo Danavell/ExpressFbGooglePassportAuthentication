@@ -4,7 +4,7 @@ const { Router } = require('express')
 
 const passport = require('passport')
 
-require(join(__dirname, '..', 'controllers', 'users'))
+require(join(__dirname, '..', 'controllers', 'auth'))
 
 const router = Router()
 

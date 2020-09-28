@@ -26,6 +26,8 @@ passport.use(
                 firstName: first_name,
                 lastName: last_name
             };
+
+            // USER SHOULD BE ADDED TO APP DB AT THIS POINT
             console.log(userData)
             done(null, profile);
         }
