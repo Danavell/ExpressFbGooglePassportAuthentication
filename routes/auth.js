@@ -10,10 +10,17 @@ require(join(__dirname, '..', 'controllers', 'googleAuth'))
 const router = Router()
 
 router
-    .get('/', passport.authenticate('facebook', { scope: ['email'] }))
-    .get('/callback',
+    .get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+    .get('/facebook/callback',
         passport.authenticate("facebook", {
             successRedirect: "/",
             failureRedirect: "/fail"
         }))
+    .get('/google/', passport.authenticate('google', { scope: ['email'] }))
+    .get('/google/callback',
+        passport.authenticate('google', {
+            successRedirect: "/",
+            failureRedirect: "/fail"
+        }))
+
 module.exports = router
